@@ -32,7 +32,7 @@ subm=""
 #dw get solver
 #subm=-S0
 
-if [ `which qbsolve` ] ; then
+if [ `which qbsolv` ] ; then
 	qbsolv -i usa.qubo -o usa.qbout -v1 -n 8 
 
 	cat usa.qbout
