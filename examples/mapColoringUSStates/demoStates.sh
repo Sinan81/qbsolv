@@ -32,8 +32,19 @@ subm=""
 #dw get solver
 #subm=-S0
 
-qbsolv -i usa.qubo -o usa.qbout -v1 -n 8 
-cat usa.qbout
+if [ `which qbsolve` ] ; then
+	qbsolv -i usa.qubo -o usa.qbout -v1 -n 8 
 
-echo Solved -- Plotting
-./plotmap.sh 
+	cat usa.qbout
+
+	echo Solved -- Plotting
+	./plotmap.sh 
+else
+	echo "./demoStates.sh: line 36: qbsolv: command not found"
+	echo "run qbsolv by either indicating the exact path:"
+	echo "    /path/to/qbsolv -i usa.qubo -o usa.qbout -v1 -n 8"
+	echo "or by setting the environment variable PATH before line 36"
+	echo '    export PATH=/path/to/qbsolv:${PATH}'
+fi
+
+
