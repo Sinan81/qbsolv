@@ -23,8 +23,8 @@ python adj2qubo.py -i usa.adj -o usa.qubo
 if [ -e usa.qbout ] ; then
 	rm -f usa.q*.svg  usa.qbout
 fi
-if [ -e /c/Users/trainee/Desktop/States ] ; then
-	rm -rf /c/Users/trainee/Desktop/States
+if [ -e $HOME/.States ] ; then
+	rm -rf $HOME/.States
 fi
 
 subm=""
@@ -32,19 +32,8 @@ subm=""
 #dw get solver
 #subm=-S0
 
-if [ `which qbsolv` ] ; then
-	qbsolv -i usa.qubo -o usa.qbout -v1 -n 8 
+../../src/qbsolv -i usa.qubo -o usa.qbout -v1 -n 8 
+cat usa.qbout
 
-	cat usa.qbout
-
-	echo Solved -- Plotting
-	./plotmap.sh 
-else
-	echo "./demoStates.sh: line 36: qbsolv: command not found"
-	echo "run qbsolv by either indicating the exact path:"
-	echo "    /path/to/qbsolv -i usa.qubo -o usa.qbout -v1 -n 8"
-	echo "or by setting the environment variable PATH before line 36"
-	echo '    export PATH=/path/to/qbsolv:${PATH}'
-fi
-
-
+echo Solved -- Plotting
+./plotmap.sh 
